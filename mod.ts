@@ -56,12 +56,12 @@ function toCodePoints(input: string): number[] {
   return codepoints;
 }
 
-interface SaslprepOptions {
+export interface SASLprepOptions {
   allowUnassigned?: boolean;
 }
 
 /** SASLprep routine. */
-export function saslprep(input: string, opts: SaslprepOptions = {}): string {
+export function saslprep(input: string, opts: SASLprepOptions = {}): string {
   if (input === null) {
     throw new TypeError("Input must not be null.");
   }
