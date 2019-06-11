@@ -15,13 +15,17 @@ saslprep('password\u0007') // Error: prohibited character
 
 ## API
 
-### `saslprep(input: string, opts: SASLprepOptions): string`
+#### `saslprep(input: string, opts: SASLprepOptions): string`
 
-Normalize user name or password.
+Normalize user name or password. Options as follows:
 
-### `SASLprepOptions.allowUnassigned?: boolean`
+``` ts
+export interface SASLprepOptions {
+  allowUnassigned?: boolean;
+}
+```
 
-A special behavior for unassigned code points, see https://tools.ietf.org/html/rfc4013#section-2.5. Disabled by default.
+Opt-in a special behavior for unassigned code points, see https://tools.ietf.org/html/rfc4013#section-2.5. Disabled by default.
 
 ## License
 
