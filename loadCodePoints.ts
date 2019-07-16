@@ -25,7 +25,9 @@ function read(): Bitfield {
 }
 
 /** Reexport the bitfield type. */
-export { Bitfield } from "./../sparse-bitfield/mod.ts";
+export {
+  Bitfield
+} from "https://denopkg.com/chiefbiiko/sparse-bitfield/mod.ts";
 
 /** Loads code points represented as bitfields. */
 export function loadCodePoints(): { [key: string]: Bitfield } {
