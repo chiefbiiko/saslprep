@@ -1,4 +1,4 @@
-import { Bitfield } from "./../sparse-bitfield/mod.ts";
+import { Bitfield } from "https://denopkg.com/chiefbiiko/sparse-bitfield/mod.ts";
 
 /** Reads an uint32 from the specified buffer offset. */
 function readUint32BE(buf: Uint8Array, offset: number): number {
