@@ -1,8 +1,10 @@
-import { test, runIfMain } from "https://deno.land/x/testing/mod.ts";
+import { test, runIfMain } from "https://deno.land/std/testing/mod.ts";
+
 import {
   assertEquals,
   assertThrows
-} from "https://deno.land/x/testing/asserts.ts";
+} from "https://deno.land/std/testing/asserts.ts";
+
 import { saslprep } from "./mod.ts";
 
 const chr: (...codepoints: number[]) => string = String.fromCodePoint;
