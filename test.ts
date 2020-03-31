@@ -1,15 +1,13 @@
-import { test, runIfMain } from "https://deno.land/std/testing/mod.ts";
-
 import {
   assertEquals,
   assertThrows
-} from "https://deno.land/std/testing/asserts.ts";
+} from "https://deno.land/std@v0.38.0/testing/asserts.ts";
 
 import { saslprep } from "./mod.ts";
 
 const chr: (...codepoints: number[]) => string = String.fromCodePoint;
 
-test({
+Deno.test({
   name: "should work with liatin letters",
   fn(): void {
     const str: string = "user";
@@ -17,7 +15,7 @@ test({
   }
 });
 
-test({
+Deno.test({
   name: "should work be case preserved",
   fn(): void {
     const str: string = "USER";
@@ -25,7 +23,7 @@ test({
   }
 });
 
-test({
+Deno.test({
   name: "should work with high code points (> U+FFFF)",
   fn(): void {
     const str: string = "\uD83D\uDE00";
@@ -33,35 +31,35 @@ test({
   }
 });
 
-test({
+Deno.test({
   name: "should remove `mapped to nothing` characters",
   fn(): void {
     assertEquals(saslprep("I\u00ADX"), "IX");
   }
 });
 
-test({
+Deno.test({
   name: "should replace `Non-ASCII space characters` with space",
   fn(): void {
     assertEquals(saslprep("a\u00A0b"), "a\u0020b");
   }
 });
 
-test({
+Deno.test({
   name: "should normalize \u00AA as NFKC",
   fn(): void {
     assertEquals(saslprep("\u00AA"), "a");
   }
 });
 
-test({
+Deno.test({
   name: "should normalize \u2168 as NFKC",
   fn(): void {
     assertEquals(saslprep("\u2168"), "IX");
   }
 });
 
-test({
+Deno.test({
   name: "should throws when prohibited characters",
   fn(): void {
     // C.2.1 ASCII control characters
@@ -129,7 +127,7 @@ test({
   }
 });
 
-test({
+Deno.test({
   name: "should not containt RandALCat and LCat bidi",
   fn(): void {
     assertThrows(
@@ -140,7 +138,7 @@ test({
   }
 });
 
-test({
+Deno.test({
   name: "RandALCat should be first and last",
   fn(): void {
     saslprep("\u0627\u0031\u0628");
@@ -152,7 +150,7 @@ test({
   }
 });
 
-test({
+Deno.test({
   name: "should handle unassigned code points",
   fn(): void {
     saslprep("a\u0487", { allowUnassigned: true });
@@ -163,5 +161,3 @@ test({
     );
   }
 });
-
-runIfMain(import.meta, { parallel: true });

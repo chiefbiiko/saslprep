@@ -1,19 +1,19 @@
 # saslprep
 
-[![Travis](http://img.shields.io/travis/chiefbiiko/saslprep.svg?style=flat)](http://travis-ci.org/chiefbiiko/saslprep) [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/chiefbiiko/saslprep?branch=master&svg=true)](https://ci.appveyor.com/project/chiefbiiko/saslprep)
+[![ci](https://github.com/chiefbiiko/saslprep/workflows/ci/badge.svg?branch=master)](https://github.com/chiefbiiko/saslprep/actions)
 
 Stringprep Profile for User Names and Passwords, [rfc4013](https://tools.ietf.org/html/rfc4013).
 
-## Usage
+## usage
 
 ``` ts
-import { saslprep } from "https://denopkg.com/chiefbiiko/saslprep/mod.ts";
+import { saslprep } from "https://denopkg.com/chiefbiiko/saslprep@v0.1.0/mod.ts";
 
 saslprep('password\u00AD') // password
 saslprep('password\u0007') // Error: prohibited character
 ```
 
-## API
+## api
 
 #### `saslprep(input: string, opts: SASLprepOptions): string`
 
@@ -27,6 +27,6 @@ export interface SASLprepOptions {
 
 Opt-in a special behavior for unassigned code points, see https://tools.ietf.org/html/rfc4013#section-2.5. Disabled by default.
 
-## License
+## license
 
 [MIT](./LICENSE)

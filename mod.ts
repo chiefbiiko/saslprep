@@ -1,4 +1,5 @@
-import { Bitfield, loadCodePoints } from "./loadCodePoints.ts";
+import { Bitfield } from "./deps.ts";
+import { loadCodePoints } from "./loadCodePoints.ts";
 
 const {
   unassigned_code_points,
@@ -24,15 +25,28 @@ const mapping2space: Bitfield = non_ASCII_space_characters;
 const mapping2nothing: Bitfield = commonly_mapped_to_nothing;
 
 // utils
-const getCodePoint: (chr: string) => number = chr => chr.codePointAt(0);
-const first: (x: any) => any = x => x[0];
-const last: (x: any) => any = x => x[x.length - 1];
+function getCodePoint(chr: string): number {
+  const codePoint: undefined | number = chr.codePointAt(0);
 
-/**
+  if (!codePoint) {
+    throw new Error(`unable to encode character ${chr}`);
+  }
+
+  return codePoint;
+}
+
+function first(x: any): any {
+  return x[0];
+}
+
+function last(x: any): any {
+  return x[x.length - 1];
+} /**
  * Convert provided string into an array of Unicode Code Points.
  * Based on https://stackoverflow.com/a/21409165/1556249
  * and https://www.npmjs.com/package/code-point-at.
  */
+
 function toCodePoints(input: string): number[] {
   const codepoints = [];
   const size = input.length;
@@ -72,10 +86,10 @@ export function saslprep(input: string, opts: SASLprepOptions = {}): string {
 
   // 1. Map
   const mapped_input: number[] = toCodePoints(input)
-    // 1.1 mapping to space
-    .map(character => (mapping2space.get(character) ? 0x20 : character))
-    // 1.2 mapping to nothing
-    .filter(character => !mapping2nothing.get(character));
+    .// 1.1 mapping to space
+    map(character => (mapping2space.get(character) ? 0x20 : character))
+    .// 1.2 mapping to nothing
+    filter(character => !mapping2nothing.get(character));
 
   // 2. Normalize
   const normalized_input: string = String.fromCodePoint

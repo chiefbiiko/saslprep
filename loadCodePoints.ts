@@ -1,13 +1,12 @@
-import { Bitfield } from "https://denopkg.com/chiefbiiko/sparse-bitfield/mod.ts";
-import { toUint8Array } from "https://deno.land/x/base64/mod.ts";
+import { Bitfield, toUint8Array } from "./deps.ts";
 
 /** Reads an uint32 from the specified buffer offset. */
 function readUint32BE(buf: Uint8Array, offset: number): number {
   return (
     (buf[offset + 0] << 24) |
-    (buf[offset + 1] << 16) |
-    (buf[offset + 2] << 8) |
-    buf[offset + 3]
+      (buf[offset + 1] << 16) |
+      (buf[offset + 2] << 8) |
+      buf[offset + 3]
   );
 }
 
@@ -27,11 +26,6 @@ function read(): Bitfield {
 
   return new Bitfield({ buffer: codepoints });
 }
-
-/** Reexport the bitfield type. */
-export {
-  Bitfield
-} from "https://denopkg.com/chiefbiiko/sparse-bitfield/mod.ts";
 
 /** Loads code points represented as bitfields. */
 export function loadCodePoints(): { [key: string]: Bitfield } {
